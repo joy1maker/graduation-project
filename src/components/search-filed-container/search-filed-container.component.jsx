@@ -8,7 +8,7 @@ const SearchFiled = () => {
                 <FilterInput id="filter-name" />
             </FilterContainer>
             <FilterContainer>
-                <FilterLabel >urgency </FilterLabel>
+                <FilterLabel >urgency</FilterLabel>
             </FilterContainer>
             <FilterContainer>
                 <FilterLabel>date</FilterLabel>
