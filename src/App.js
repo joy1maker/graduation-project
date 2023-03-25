@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import OHIFViewer from './pages/viewer/viewer.component';
+import { Route, Routes } from 'react-router-dom';
+import HomePage from './pages/mainpage/mainpage.component';
+import SchedulePage from './pages/schudle/schudle.component';
+import Navgation from './pages/navgation/navgation.component';
 function App() {
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path='/' element={<Navgation />}>
+          <Route index element={<HomePage />} />
+          <Route path='/viewer' element={<OHIFViewer />} />
+          <Route path='/schedule' element={<SchedulePage />} />
+        </Route>
+      </Routes>
+      {/* <OHIFViewer /> */}
     </div>
   );
 }
-
 export default App;
