@@ -10,6 +10,13 @@ const choices = [
         "title": "sechdule",
         "imageUrl": "https://res.cloudinary.com/monday-blogs/fl_lossy,f_auto,q_auto/wp-blog/2020/09/Project-schedule.jpg",
         "route": "schedule"
+    },
+    {
+        "id": 3,
+        "title": "questions",
+        "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/11/Blue_question_mark_icon.svg",
+        "route": "questions"
+
     }
 
 ]

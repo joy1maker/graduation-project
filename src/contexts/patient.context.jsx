@@ -6,11 +6,11 @@ export const PatientsContext = createContext({
 })
 export const PatientsProvider = ({ children }) => {
     useEffect(() => {
-
+        //get paitents from db
     }, [])
 
-
-    const [currentPatients, setCurrentPatients] = useState(patients);
+    const reformatedPaitentData = patients.map((paitent) => ({ ...paitent, "urgent": paitent.urgent ? "uregent" : "-" }));
+    const [currentPatients, setCurrentPatients] = useState(reformatedPaitentData);
     const value = { currentPatients, setCurrentPatients };
     return <PatientsContext.Provider value={value}>{children}</PatientsContext.Provider>
 }

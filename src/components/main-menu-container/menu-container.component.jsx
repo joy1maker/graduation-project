@@ -17,5 +17,4 @@ const MenuContainer = () => {
         </div>
     )
 }
-
 export default MenuContainer;

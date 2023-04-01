@@ -20,7 +20,8 @@ export const NavigationContainer = styled.div`
     margin-bottom: 20px;
     width: 80%;
   }
-
+  
+  
 `;
 export const LogoContainer = styled(Link)`
 height: 100%;

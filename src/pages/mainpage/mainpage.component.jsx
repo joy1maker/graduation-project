@@ -1,10 +1,18 @@
-// import styles from "./mainpage.styles.css"
 import MenuContainer from "../../components/main-menu-container/menu-container.component";
+import Authentcation from "../authentcation/auth.component";
+
 const HomePage = () => {
+    const user = true;
 
     return (
         <div>
-            <MenuContainer />
+            {
+                user
+                    ?
+                    <MenuContainer />
+                    :
+                    <Authentcation />
+            }
         </div>
     )
 }
