@@ -1,7 +1,8 @@
 import React, { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTable, useSortBy, useFilters, useGlobalFilter, usePagination } from "react-table";
-import './react-table.styles.css'
+
+import { Table } from './react-table.styles'
 
 const BasicTable = ({ COLUMNS, DATA }) => {
 
@@ -39,7 +40,7 @@ const BasicTable = ({ COLUMNS, DATA }) => {
     const { pageIndex, pageSize } = state;
     return (
         <>
-            <table {...getTableProps()}>
+            <Table {...getTableProps()}>
                 <thead>
                     {
                         headerGroups.map((headerGroup) => (
@@ -81,7 +82,7 @@ const BasicTable = ({ COLUMNS, DATA }) => {
                     }
 
                 </tbody>
-            </table>
+            </Table>
             <div>
                 <div>
                     <strong>

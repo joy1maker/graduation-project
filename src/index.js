@@ -6,16 +6,19 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { PatientsProvider } from './contexts/patient.context';
 import { DoctorProvider } from './contexts/doctor.context'
+import { QuestionsProvider } from './contexts/questions.context';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <PatientsProvider>
-        <DoctorProvider>
-          <App />
-        </DoctorProvider>
-      </PatientsProvider>
+      <QuestionsProvider>
+        <PatientsProvider>
+          <DoctorProvider>
+            <App />
+          </DoctorProvider>
+        </PatientsProvider>
+      </QuestionsProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

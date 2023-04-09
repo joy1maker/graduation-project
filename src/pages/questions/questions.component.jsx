@@ -1,9 +1,8 @@
+import QustionsContainer from "../../components/questions-container/questions-container.component";
 
 const QuestionsPage = () => {
     return (
-        <div>
-            hello from question page
-        </div>
+        <QustionsContainer />
     )
 }
 export default QuestionsPage;

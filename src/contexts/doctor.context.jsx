@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from "react";
-import patients from "../assets/paitents";
 export const DoctorContext = createContext({
     currentDoctor: null,
     setCurrentDoctor: () => null
