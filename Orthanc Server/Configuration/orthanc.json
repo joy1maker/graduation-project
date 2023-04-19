@@ -77,7 +77,7 @@
   // folders, in which case they will be scanned non-recursively to
   // find shared libraries. Backslashes must be either escaped by
   // doubling them, or replaced by forward slashes "/".
-  "Plugins" : [ "D:\\Orthanc Server\\Plugins" ],
+  "Plugins" : [ "D:\\"react projects"\\clinc-system\\"Orthanc Server"\\Plugins" ],
 
   // Maximum number of processing jobs that are simultaneously running
   // at any given time. A value of "0" indicates to use all the
@@ -201,7 +201,7 @@
    **/
 
   // Whether remote hosts can connect to the HTTP server
-  "RemoteAccessAllowed" : false,
+  "RemoteAccessAllowed" : true,
 
   // Whether or not SSL is enabled
   "SslEnabled" : false,

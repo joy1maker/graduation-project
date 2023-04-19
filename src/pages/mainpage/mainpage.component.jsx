@@ -5,15 +5,16 @@ const HomePage = () => {
     const user = true;
 
     return (
-        <div>
+        <>
             {
                 user
                     ?
+
                     <MenuContainer />
                     :
                     <Authentcation />
             }
-        </div>
+        </>
     )
 }
 export default HomePage;

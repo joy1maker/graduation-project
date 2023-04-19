@@ -4,18 +4,25 @@ export const DoctorContext = createContext({
     setCurrentDoctor: () => null
 })
 export const DoctorProvider = ({ children }) => {
-
     const testDoctor = {
-        email: 'youssiffayez2@gmail.com',
-        fullName: 'youssif fayez abdel twab',
-        department: 'Department of General Surgery',
-        catigores: ['first mid pregnency', "second mid pregnency", "third mid pregnency", "after pregnency"]
+        "id": 7,
+        "email": "nermeen33@gmail.com",
+        "first_name": "nermeen",
+        "last_name": "mohamed",
+        "department": 2,
+        "catigores": [
+            "bones",
+            "eyes"
+        ],
+        "image_name": "doc1.jpg",
+        "department_name": "Department of General Surgery"
     }
     useEffect(() => {
-        //get doctor from db
+
     }, [])
 
     const [currentDoctor, setCurrentDoctor] = useState(testDoctor);
+
     const value = { currentDoctor, setCurrentDoctor };
     return <DoctorContext.Provider value={value}>{children}</DoctorContext.Provider>
 }

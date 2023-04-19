@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { QuestionsContext } from "../../contexts/questions.context";
 import { DoctorContext } from "../../contexts/doctor.context";
 import { QuestionsContainer, Select } from './questions-container.styles'
+import { motion } from "framer-motion";
 const QustionsContainer = () => {
     const { currentQuestions } = useContext(QuestionsContext);
     const { currentDoctor } = useContext(DoctorContext);
@@ -16,7 +17,7 @@ const QustionsContainer = () => {
     }
 
     return (
-        <>
+        <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} exit={{ x: window.innerWidth }}>
             <Select onChange={handleChange} value={currentSelect} >
                 {
                     catigores.map((catigore, idx) => <option key={idx} value={catigore}>{catigore}</option>)
@@ -27,7 +28,7 @@ const QustionsContainer = () => {
                     FilterdQuestions.map((question) => <QuestionContainer key={question.id} catigores={catigores} question={question} />)
                 }
             </QuestionsContainer>
-        </>
+        </motion.div>
 
     )
 }
