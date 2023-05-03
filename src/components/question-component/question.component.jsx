@@ -1,8 +1,13 @@
 import { useCollapse } from 'react-collapsed';
 import { CollabsableContainer, Header, Content, AttatchmentsContainer } from './question.styles'
-const QuestionContainer = ({ question }) => {
+import Button from 'react-bootstrap/Button';
+
+const QuestionContainer = ({ question, setCurrentId }) => {
     const { getCollapseProps, getToggleProps } = useCollapse();
-    const { question_title, question_body, attatchment } = question;
+    const { question_title, question_body, attatchment, id } = question;
+    const onClickHandler = () => {
+        setCurrentId(id);
+    }
     return (
         <CollabsableContainer>
             <Header {...getToggleProps()}>
@@ -16,6 +21,9 @@ const QuestionContainer = ({ question }) => {
                     <AttatchmentsContainer>
                         <img src={attatchment} alt="attatchment" />
                     </AttatchmentsContainer>
+                    <Button variant="primary" onClick={onClickHandler}>
+                        reply &#8594;
+                    </Button>
                 </Content>
             </div>
 

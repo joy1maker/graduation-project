@@ -7,6 +7,9 @@ export const Table = styled.table`
     td,th{
         padding: 8px;
     }
+    td{
+      text-align :center ;
+    }
     tr:nth-child(even){
         background-color: #2c363f;
     }
@@ -22,4 +25,5 @@ export const Table = styled.table`
     span{
     font-size: 20px;
   }
+
 `

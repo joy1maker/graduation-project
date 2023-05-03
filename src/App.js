@@ -12,9 +12,10 @@ import ProfilePage from './pages/profile/profile-page.component';
 import React from 'react';
 import { AnimatePresence } from 'framer-motion'
 import ViewerTemp from './pages/viewer/viewer-temp.component';
+import DeleteReservationsPage from './pages/delete-reservations/delete-reservations.component';
+
 function App() {
   const location = useLocation();
-
   return (
     <div className="App">
       <AnimatePresence mode="wait" initial={false}>
@@ -27,14 +28,13 @@ function App() {
             <Route path='/questions' element={<QuestionsPage />} />
             <Route path='/signup' element={<SignupPage />} />
             <Route path='/myprofile' element={<ProfilePage />} />
+            <Route path='/delete-reservation' element={<DeleteReservationsPage />} />
           </Route>
         </Routes>
       </AnimatePresence>
       <ReactQueryDevtools initialIsOpen={false} position='bottom-right' />
-
-
-
     </div>
   );
 }
 export default App;
+

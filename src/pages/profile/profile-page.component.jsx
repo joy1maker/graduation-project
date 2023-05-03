@@ -6,7 +6,7 @@ import {
 } from './profile-page.styles'
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
-
+import { motion } from 'framer-motion';
 
 const ProfilePage = () => {
     const { currentDoctor } = useContext(DoctorContext);
@@ -57,51 +57,54 @@ const ProfilePage = () => {
 
 
     return (
-        <ProfileContainer>
-            <ImageContainer>
-                <img src={getProfilePic()} alt="profile" />
-                <Name>dr.{first_name}</Name>
-            </ImageContainer>
-            <InfoContainer>
-                <Field>
-                    <Label>full name</Label>
-                    <Content>{first_name} {last_name}</Content>
-                </Field>
-                <hr />
-                <Field>
-                    <Label>email address</Label>
-                    {
-                        isEditing
-                            ?
-                            <Input onChange={handleChange} name='email' value={email} />
-                            :
-                            <Content>{email}</Content>
-                    }
-                </Field>
-                <hr />
-                <Field>
-                    <Label>department</Label>
-                    <Content>{department_name}</Content>
-                </Field>
-                <hr />
-                <Field style={{ flexDirection: "column" }}>
-                    <Label>catigores </Label>
-                    {isEditing && <Input onChange={handelCatigoreChange} onKeyDown={addCatigorie} value={catigore} />}
-                    <Content style={{ margin: "20px" }}>
-                        <ListGroup >
-                            {
-                                catigores.map((catigore, idx) =>
-                                    <ListGroup.Item key={idx} style={ListItemStyle} onClick={() => catigoreClick(catigore)}>{catigore}</ListGroup.Item>
-                                )
-                            }
+        <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} exit={{ x: window.innerWidth }} >
 
-                        </ListGroup>
-                    </Content>
-                </Field>
-                <Button variant="outline-light" onClick={handelClick}>{isEditing ? "save changes" : "Edit info"}</Button>
-            </InfoContainer>
-        </ProfileContainer>
 
+            <ProfileContainer>
+                <ImageContainer>
+                    <img src={getProfilePic()} alt="profile" />
+                    <Name>dr.{first_name}</Name>
+                </ImageContainer>
+                <InfoContainer>
+                    <Field>
+                        <Label>full name</Label>
+                        <Content>{first_name} {last_name}</Content>
+                    </Field>
+                    <hr />
+                    <Field>
+                        <Label>email address</Label>
+                        {
+                            isEditing
+                                ?
+                                <Input onChange={handleChange} name='email' value={email} />
+                                :
+                                <Content>{email}</Content>
+                        }
+                    </Field>
+                    <hr />
+                    <Field>
+                        <Label>department</Label>
+                        <Content>{department_name}</Content>
+                    </Field>
+                    <hr />
+                    <Field style={{ flexDirection: "column" }}>
+                        <Label>catigores </Label>
+                        {isEditing && <Input onChange={handelCatigoreChange} onKeyDown={addCatigorie} value={catigore} />}
+                        <Content style={{ margin: "20px" }}>
+                            <ListGroup >
+                                {
+                                    catigores.map((catigore, idx) =>
+                                        <ListGroup.Item key={idx} style={ListItemStyle} onClick={() => catigoreClick(catigore)}>{catigore}</ListGroup.Item>
+                                    )
+                                }
+
+                            </ListGroup>
+                        </Content>
+                    </Field>
+                    <Button variant="outline-light" onClick={handelClick}>{isEditing ? "save changes" : "Edit info"}</Button>
+                </InfoContainer>
+            </ProfileContainer>
+        </motion.div>
     )
 }
 export default ProfilePage;

@@ -7,7 +7,6 @@ import CoulmnFilter from "../react-table/tableFilter.component";
 const PatientsContainer = () => {
     const { reformatedReservationData: reservations } = useContext(ReservationContext)
 
-    console.log(reservations)
     const COLUMNS = [
         {
             Header: "ID",
@@ -23,7 +22,7 @@ const PatientsContainer = () => {
         {
             Header: 'Reservation Day',
             accessor: 'reservation_time',
-            Cell: ({ value }) => { return format(new Date(value), 'dd/MM/yyyy') },
+            Cell: ({ value }) => { return format(new Date(value), 'dd/MM/yyyy HH:MM:SS') },
             Filter: CoulmnFilter,
             disableFilters: true
         },

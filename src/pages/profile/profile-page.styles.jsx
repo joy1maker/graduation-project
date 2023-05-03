@@ -26,7 +26,7 @@ export const InfoContainer = styled.div`
     background-color: rgb(62 61 61);
     background-clip: border-box;
     border: 0 solid rgba(0,0,0,.125);
-    border-radius: .25rem;
+    border-radius: 1rem;
     hr{
         width: 80%;
         align-self: center;

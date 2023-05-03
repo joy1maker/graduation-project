@@ -15,6 +15,10 @@ export const Header = styled.div`
 export const Content = styled.div`
         padding: 6px;
     background-color: #171c21;
+    button{
+        margin: 30px;
+        width: 100px;
+    }
 `
 export const AttatchmentsContainer = styled.div`
     display:flex;

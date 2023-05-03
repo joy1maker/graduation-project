@@ -4,12 +4,14 @@ import { QuestionsContext } from "../../contexts/questions.context";
 import { DoctorContext } from "../../contexts/doctor.context";
 import { QuestionsContainer, Select } from './questions-container.styles'
 import { motion } from "framer-motion";
+import ReplyComponent from "../reply/reply.component";
 const QustionsContainer = () => {
     const { currentQuestions } = useContext(QuestionsContext);
     const { currentDoctor } = useContext(DoctorContext);
     const { catigores } = currentDoctor;
     const [currentSelect, setCurrentSelect] = useState();
     const [FilterdQuestions, setFilterdQuestions] = useState(currentQuestions);
+    const [currentId, setCurrentId] = useState(null);
     const handleChange = (event) => {
         setCurrentSelect(event.target.value);
         const Filterd = currentQuestions.filter((question) => question.catigore === currentSelect);
@@ -25,9 +27,11 @@ const QustionsContainer = () => {
             </Select>
             <QuestionsContainer>
                 {
-                    FilterdQuestions.map((question) => <QuestionContainer key={question.id} catigores={catigores} question={question} />)
+                    FilterdQuestions.map((question) => <QuestionContainer key={question.id} catigores={catigores} question={question} setCurrentId={setCurrentId} />)
                 }
             </QuestionsContainer>
+            <hr />
+            <ReplyComponent id={currentId} />
         </motion.div>
 
     )
