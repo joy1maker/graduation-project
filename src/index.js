@@ -14,6 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-datetime-picker/dist/DateTimePicker.css';
 import 'react-calendar/dist/Calendar.css';
 import 'react-clock/dist/Clock.css';
+import { PaitentsProvider } from './contexts/paitent.context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -24,11 +25,13 @@ root.render(
         <ViewerProvider>
           <DepartmentProvider>
             <DoctorProvider>
-              <QuestionsProvider>
-                <ReservationProvider>
-                  <App />
-                </ReservationProvider>
-              </QuestionsProvider>
+              <PaitentsProvider>
+                <QuestionsProvider>
+                  <ReservationProvider>
+                    <App />
+                  </ReservationProvider>
+                </QuestionsProvider>
+              </PaitentsProvider>
             </DoctorProvider>
           </DepartmentProvider>
         </ViewerProvider>

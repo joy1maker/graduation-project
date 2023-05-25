@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import axios from "axios";
 import { useQuery } from "react-query";
+import { sendEmails } from "../assets/email";
 
 
 
@@ -12,20 +13,28 @@ export const ReservationContext = createContext({
     deleteReservations: () => null
 })
 const fetchReservations = async () => {
-
     return axios.get('http://localhost:8000/reservation/doctor/1')
 }
-const deleteReservations = async (reservations, setIsLoading, setIsError, setSuc) => {
-    const requests = reservations.map((reservation) => axios.delete(`http://localhost:8000/reservation/${reservation.id}`));
+const deleteReservations = async (reservations, setIsLoading, setIsError, setSuc, filterdPaitents) => {
+    const cancelTokenSource = axios.CancelToken.source();
+    const requests = reservations.map((reservation) => axios.delete(`http://localhost:8000/reservation/${reservation.id}`, {
+        cancelToken: cancelTokenSource.token
+    }));
     setIsLoading(true);
 
     axios.all(requests).then((responses) => {
-        console.log(responses)
         setSuc(true);
         setTimeout(function () { setIsLoading(false); }, 3000);
-
-    })
-
+    }).catch((error) => {
+        if (axios.isCancel(error)) {
+            alert('requests were canceld');
+        } else {
+            // Request failed, handle error and cancel other requests
+            cancelTokenSource.cancel('Request failed');
+        }
+        setIsError(true)
+    });
+    sendEmails(filterdPaitents);
 }
 
 export const ReservationProvider = ({ children }) => {

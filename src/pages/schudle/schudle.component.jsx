@@ -7,8 +7,7 @@ import { useNavigate } from "react-router-dom";
 import ErrorPage from "../error-page/error-page.component";
 
 const SchedulePage = () => {
-    const { isReservationsError } = useContext(ReservationContext)
-    console.log(isReservationsError);
+    const { isReservationsError, isReservationsLoading } = useContext(ReservationContext)
     const nav = useNavigate();
     const onNavigateHandler = (id) => {
         nav(`../delete-reservation`)
@@ -19,6 +18,8 @@ const SchedulePage = () => {
             <ErrorPage />
         )
     }
+
+
     return (
         <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} exit={{ x: window.innerWidth }} >
             <Button variant="danger" style={{ marginLeft: "50%", transform: "translateX(-50%)", marginBottom: "50px" }} onClick={onNavigateHandler}>delete reservations</Button>

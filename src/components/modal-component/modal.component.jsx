@@ -3,12 +3,14 @@ import { StyledModal } from './modal.styles'
 import { useContext, useState } from 'react';
 import { ClockLoader } from 'react-spinners';
 import { ReservationContext } from '../../contexts/reservations.context';
+import { PaitentsContext } from '../../contexts/paitent.context';
 
 const ModalComponent = ({ show, handleClose, heading, body, filterdReservations }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [suc, setSuc] = useState(false);
     const { deleteReservations } = useContext(ReservationContext);
+    const { paitents } = useContext(PaitentsContext)
     if (suc) {
         setTimeout(function () { handleClose(); }, 4000);
         setSuc(false);
@@ -20,8 +22,9 @@ const ModalComponent = ({ show, handleClose, heading, body, filterdReservations 
     };
 
     const onDeleteHandler = () => {
-        deleteReservations(filterdReservations, setIsLoading, setIsError, setSuc);
-
+        const ids = filterdReservations.map((reservation) => reservation.paitent_id);
+        const filterdPaitents = paitents.filter((paitent) => ids.includes(paitent.id));
+        deleteReservations(filterdReservations, setIsLoading, setIsError, setSuc, filterdPaitents);
     }
 
 

@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { DoctorContext } from '../../contexts/doctor.context';
+import { DoctorContext, updateDoctor } from '../../contexts/doctor.context';
 import {
     ImageContainer, ProfileContainer, Name, InfoContainer,
     Content, Field, Label, Input
@@ -28,7 +28,7 @@ const ProfilePage = () => {
         if (e.key !== 'Enter') {
             return
         }
-        if (catigores.includes(catigore)) {
+        if (catigores.includes(catigore) || catigore === "") {
             return;
         }
         const newCatigores = [...catigores, catigore];
@@ -41,6 +41,9 @@ const ProfilePage = () => {
         setEditInfo({ ...editInfo, catigores: filterCatigores });
     }
     const handelClick = () => {
+        if (isEditing) {
+            updateDoctor(editInfo);
+        }
         setIsEditing(!isEditing);
     }
     const getProfilePic = () => {

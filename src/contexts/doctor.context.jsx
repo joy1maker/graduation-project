@@ -1,11 +1,19 @@
+import axios from "axios";
 import { createContext, useState, useEffect } from "react";
 export const DoctorContext = createContext({
     currentDoctor: null,
     setCurrentDoctor: () => null
 })
+
+export const updateDoctor = async (doctor) => {
+    const { id } = doctor;
+    axios.put(`http://localhost:8000/doctor/${id}`, doctor)
+}
 export const DoctorProvider = ({ children }) => {
+
+
     const testDoctor = {
-        "id": 7,
+        "id": 1,
         "email": "nermeen33@gmail.com",
         "first_name": "nermeen",
         "last_name": "mohamed",

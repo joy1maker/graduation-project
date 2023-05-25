@@ -1,25 +1,49 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import medical_image_preview from '../../assets/medical_image_preview.jpg'
-import df from "../../assets/ID_0003_AGE_0075_CONTRAST_1_CT.dcm"
+import axios from 'axios';
+import { Blob } from 'blob-polyfill'
+import buffer from 'buffer';
+import { useLocation } from 'react-router-dom';
 const ViewerTemp = () => {
     const [selectedFile, setSelectedFile] = useState("");
+
     const [nonDicomImg, setNonDicomImg] = useState(false);
     const [file, setFile] = useState(null);
-    const getDcmFile = async () => {
-        const file = await require("../../assets/dicom data/ID_0099_AGE_0061_CONTRAST_0_CT.dcm");
-        setFile(file);
-    }
-    getDcmFile();
+    const location = useLocation();
+    const props = location;
+    console.log(props);
+    useEffect(() => {
+        const getDcmFile = async () => {
+            try {
+                const id = await localStorage.getItem("paitent_id");
+                const file_name = await localStorage.getItem("file_name");
+                if (id && file_name) {
+                    const response = await axios.get(`http://localhost:8000/dicom?filename=${file_name}&paitent_id=${id}`);
+                    const dcmData = response.data.dcm_data;
+                    const bytes = buffer.Buffer.from(dcmData, 'base64');
+                    const dcmBlob = new Blob([bytes], { type: 'application/dicom' });
+                    const dcmObjectUrl = URL.createObjectURL(dcmBlob);
+                    setFile(dcmObjectUrl);
+                }
+                else {
+                    setFile(null)
+                }
+
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        getDcmFile()
+    }, [])
     const params = useMemo(() => {
         const p = [];
 
         p["showOrientation"] = true;
         p["expandable"] = true;
-        // p["worldSpace"] = true;
         p["showRuler"] = true;
         p["showControls"] = true;
         p["showControlBar"] = true;
-        p["images"] = [[df]];
+        p["displayMin"] = true;
         return p;
     }, [])
 
@@ -27,8 +51,13 @@ const ViewerTemp = () => {
         if (!file) return;
         params["images"] = [[file]];
         window.papaya.Container.resetViewer(0, params);
+        return () => {
+        }
         // eslint-disable-next-line
     }, [file])
+
+
+
     useEffect(() => {
 
         window.papaya.Container.startPapaya();
