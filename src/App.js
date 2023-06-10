@@ -35,6 +35,7 @@ function App() {
       <ReactQueryDevtools initialIsOpen={false} position='bottom-right' />
     </div>
   );
+  //final
 }
 export default App;
 
