@@ -14,13 +14,13 @@ const PatientsContainer = () => {
             Filter: CoulmnFilter,
             disableFilters: true
         },
+        // {
+        //     Header: 'Name',
+        //     accessor: 'first_name',
+        //     Filter: CoulmnFilter
+        // },
         {
-            Header: 'Name',
-            accessor: 'first_name',
-            Filter: CoulmnFilter
-        },
-        {
-            Header: 'Reservation Day',
+            Header: 'Reservation Time',
             accessor: 'reservation_time',
             Cell: ({ value }) => { return format(new Date(value), 'dd/MM/yyyy HH:MM:SS') },
             Filter: CoulmnFilter,

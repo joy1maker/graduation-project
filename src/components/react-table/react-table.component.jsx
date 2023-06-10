@@ -67,7 +67,7 @@ const BasicTable = ({ COLUMNS, DATA }) => {
                         page.map((row) => {
                             prepareRow(row);
                             return (
-                                <tr {...row.getRowProps()} onClick={() => onNavigateHandler(row.original.id)}>
+                                <tr {...row.getRowProps()} onClick={() => onNavigateHandler(row.original.reserved_patient_id)}>
                                     {
                                         row.cells.map((cell) => {
 

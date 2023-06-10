@@ -9,7 +9,7 @@ import ErrorPage from "../error-page/error-page.component";
 const SchedulePage = () => {
     const { isReservationsError, isReservationsLoading } = useContext(ReservationContext)
     const nav = useNavigate();
-    const onNavigateHandler = (id) => {
+    const onNavigateHandler = () => {
         nav(`../delete-reservation`)
     }
 

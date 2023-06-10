@@ -12,7 +12,7 @@ const fetchDepartments = async () => {
 
 }
 export const DepartmentProvider = ({ children }) => {
-    const { isLoading: isDepartmentsLoading, isError: isDepartmentsError, data } = useQuery('departments', fetchDepartments, { staleTime: 60000, retry: false });
+    const { isLoading: isDepartmentsLoading, isError: isDepartmentsError, data } = useQuery('departments', fetchDepartments, { staleTime: 60000, retry: false, enabled: false });
     const Departments = data ? data.data : [];
     const value = { Departments, isDepartmentsLoading, isDepartmentsError };
     return <DepartmentContext.Provider value={value}>{children}</DepartmentContext.Provider>

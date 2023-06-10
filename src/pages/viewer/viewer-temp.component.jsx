@@ -4,7 +4,9 @@ import axios from 'axios';
 import { Blob } from 'blob-polyfill'
 import buffer from 'buffer';
 import { useLocation } from 'react-router-dom';
+import URLS from '../../assets/URLS'
 const ViewerTemp = () => {
+    const { fast } = URLS;
     const [selectedFile, setSelectedFile] = useState("");
 
     const [nonDicomImg, setNonDicomImg] = useState(false);
@@ -18,7 +20,7 @@ const ViewerTemp = () => {
                 const id = await localStorage.getItem("paitent_id");
                 const file_name = await localStorage.getItem("file_name");
                 if (id && file_name) {
-                    const response = await axios.get(`http://localhost:8000/dicom?filename=${file_name}&paitent_id=${id}`);
+                    const response = await axios.get(`${fast}/dicom?filename=${file_name}&paitent_id=${id}`);
                     const dcmData = response.data.dcm_data;
                     const bytes = buffer.Buffer.from(dcmData, 'base64');
                     const dcmBlob = new Blob([bytes], { type: 'application/dicom' });

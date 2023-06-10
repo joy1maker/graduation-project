@@ -11,6 +11,7 @@ const ModalComponent = ({ show, handleClose, heading, body, filterdReservations 
     const [suc, setSuc] = useState(false);
     const { deleteReservations } = useContext(ReservationContext);
     const { paitents } = useContext(PaitentsContext)
+    const { refetchReservations } = useContext(ReservationContext)
     if (suc) {
         setTimeout(function () { handleClose(); }, 4000);
         setSuc(false);
@@ -21,10 +22,11 @@ const ModalComponent = ({ show, handleClose, heading, body, filterdReservations 
         marginBottom: "50px"
     };
 
-    const onDeleteHandler = () => {
-        const ids = filterdReservations.map((reservation) => reservation.paitent_id);
+    const onDeleteHandler = async () => {
+        const ids = filterdReservations.map((reservation) => reservation.reserved_patient_id);
         const filterdPaitents = paitents.filter((paitent) => ids.includes(paitent.id));
-        deleteReservations(filterdReservations, setIsLoading, setIsError, setSuc, filterdPaitents);
+        await deleteReservations(filterdReservations, setIsLoading, setIsError, setSuc, filterdPaitents);
+        refetchReservations();
     }
 
 

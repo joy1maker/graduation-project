@@ -6,6 +6,7 @@ export const Container = styled.div`
     flex-direction:column;
     justify-content:center;
     align-items:center;
+    margin-top: 10%;
     input{
         width:100%;
     }

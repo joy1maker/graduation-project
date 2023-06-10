@@ -4,22 +4,29 @@ import Button from 'react-bootstrap/Button';
 
 const QuestionContainer = ({ question, setCurrentId }) => {
     const { getCollapseProps, getToggleProps } = useCollapse();
-    const { question_title, question_body, attatchment, id } = question;
+    const { title, body, attatchments: attatchment, id } = question;
     const onClickHandler = () => {
         setCurrentId(id);
     }
     return (
         <CollabsableContainer>
             <Header {...getToggleProps()}>
-                {question_title}
+                {title}
             </Header>
             <div {...getCollapseProps()}>
                 <Content>
                     {
-                        question_body
+                        body
                     }
                     <AttatchmentsContainer>
-                        <img src={attatchment} alt="attatchment" />
+
+                        {
+                            attatchment === "[]"
+                                ?
+                                <></>
+                                :
+                                <img src={attatchment} alt="attatchment" />
+                        }
                     </AttatchmentsContainer>
                     <Button variant="primary" onClick={onClickHandler}>
                         reply &#8594;

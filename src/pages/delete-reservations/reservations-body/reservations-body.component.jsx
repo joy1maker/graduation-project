@@ -7,7 +7,6 @@ const ReservationsBody = ({ reservations }) => {
             <TableContainer>
                 <ContainerHeader>
                     <HeaderBlock>id</HeaderBlock>
-                    <HeaderBlock>full name</HeaderBlock>
                     <HeaderBlock>date</HeaderBlock>
                 </ContainerHeader>
                 {reservations.map((reservation, idx) => <ReservationField key={idx} reservation={reservation} />)}

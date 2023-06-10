@@ -2,22 +2,25 @@ import { createContext } from "react";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { sendEmails } from "../assets/email";
-
-
+import { useContext } from "react";
+import { DoctorContext } from "./doctor.context";
+import URLS from "../assets/URLS";
+const { fast } = URLS;
 
 
 export const ReservationContext = createContext({
     reformatedReservationData: null,
     isReservationsLoading: null,
     isReservationsError: null,
-    deleteReservations: () => null
+    deleteReservations: () => null,
+    refetchReservations: () => null
 })
-const fetchReservations = async () => {
-    return axios.get('http://localhost:8000/reservation/doctor/1')
+const fetchReservations = async (id) => {
+    return axios.get(`http://localhost:8000/api/doctor-reservations/${id}`)
 }
 const deleteReservations = async (reservations, setIsLoading, setIsError, setSuc, filterdPaitents) => {
     const cancelTokenSource = axios.CancelToken.source();
-    const requests = reservations.map((reservation) => axios.delete(`http://localhost:8000/reservation/${reservation.id}`, {
+    const requests = reservations.map((reservation) => axios.delete(`${fast}/reservation/${reservation.id}`, {
         cancelToken: cancelTokenSource.token
     }));
     setIsLoading(true);
@@ -38,10 +41,10 @@ const deleteReservations = async (reservations, setIsLoading, setIsError, setSuc
 }
 
 export const ReservationProvider = ({ children }) => {
-
-    const { isLoading: isReservationsLoading, isError: isReservationsError, data } = useQuery('Reservations', fetchReservations, { staleTime: 60000, retry: false });
+    const { doctor } = useContext(DoctorContext)
+    const { isLoading: isReservationsLoading, isError: isReservationsError, data, refetch: refetchReservations } = useQuery('Reservations', () => fetchReservations(doctor.id), { staleTime: 60000, retry: false, enabled: doctor !== null });
     const reservations = data ? data.data : [];
     const reformatedReservationData = reservations.map((reservation) => ({ ...reservation, "urgent": reservation.urgent ? "uregent" : "-" }));
-    const value = { reformatedReservationData, isReservationsLoading, isReservationsError, deleteReservations };
+    const value = { reformatedReservationData, isReservationsLoading, isReservationsError, deleteReservations, refetchReservations };
     return <ReservationContext.Provider value={value}>{children}</ReservationContext.Provider>
 }

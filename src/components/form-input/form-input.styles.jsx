@@ -28,17 +28,19 @@ export const Input = styled.input`
   font-size: 18px;
   padding: 10px 10px 10px 5px;
   display: block;
-  width: 50%;
+  width: 300% !important;
   border: none;
   border-radius: 0;
   border-bottom: 1px solid ${subColor};
   margin: 20px 0;
+  margin-left:-115px;
   &:focus {
     outline: none;
   }
   &:focus ~ ${FormInputLabel} {
     ${shrinkLabelStyles};
   }
+  
 `;
 
 export const Group = styled.div`

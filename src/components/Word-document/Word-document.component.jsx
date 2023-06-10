@@ -5,15 +5,13 @@ import mustache from 'mustache';
 import { Container } from './word-document.styles'
 import { template } from '../../assets/word-template';
 import { Button } from 'react-bootstrap';
-const WordDocument = () => {
+import { calculateAge } from '../reply/reply.component';
+const WordDocument = ({ paitent }) => {
     const [editorContent, setEditorContent] = useState('');
-    console.log(editorContent);
-    const data = {
-        name: "youssif fayez",
-        age: "20"   
-    }
+    console.log(paitent);
+
     const templateString = template;
-    const renderedString = mustache.render(templateString, data);
+    const renderedString = mustache.render(templateString, { ...paitent, age: calculateAge(paitent.birth_date) });
     const sendDataToBackend = () => {
         axios.post('/api/word-document', { content: editorContent })
             .then(response => {

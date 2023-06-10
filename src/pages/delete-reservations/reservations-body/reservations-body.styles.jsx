@@ -26,7 +26,7 @@ export const ContainerHeader = styled.div`
 `
 export const HeaderBlock = styled.div`
   text-transform: capitalize;
-  width: 33%; 
+  width: 50%; 
 `
 export const Total = styled.div`
   margin-top: 30px;

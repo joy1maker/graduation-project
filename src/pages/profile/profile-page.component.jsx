@@ -9,12 +9,15 @@ import Button from 'react-bootstrap/Button';
 import { motion } from 'framer-motion';
 
 const ProfilePage = () => {
-    const { currentDoctor } = useContext(DoctorContext);
+    const { doctorData } = useContext(DoctorContext);
     const ListItemStyle = { backgroundColor: "rgb(73 71 71)", color: "white", cursor: "pointer" };
-    const [editInfo, setEditInfo] = useState(currentDoctor)
+    const [editInfo, setEditInfo] = useState(doctorData)
     const [isEditing, setIsEditing] = useState(false);
-    const { email, first_name, last_name, catigores, department_name, image_name } = editInfo;
     const [catigore, setCatigore] = useState("");
+    if (!doctorData) {
+        return <></>
+    }
+    const { email, first_name, last_name, categories: catigores, department_name, image_name } = editInfo;
     const handelCatigoreChange = (event) => {
         setCatigore(event.target.value);
     }
@@ -32,13 +35,14 @@ const ProfilePage = () => {
             return;
         }
         const newCatigores = [...catigores, catigore];
-        setEditInfo({ ...editInfo, catigores: newCatigores });
+        console.log(newCatigores);
+        setEditInfo({ ...editInfo, categories: newCatigores });
         setCatigore("");
     }
     // eslint-disable-next-line
     const removeCatigorie = (value) => {
         const filterCatigores = catigores.filter((catigore) => catigore !== value);
-        setEditInfo({ ...editInfo, catigores: filterCatigores });
+        setEditInfo({ ...editInfo, categories: filterCatigores });
     }
     const handelClick = () => {
         if (isEditing) {
@@ -57,7 +61,6 @@ const ProfilePage = () => {
     }
 
     const catigoreClick = isEditing ? removeCatigorie : () => null;
-
 
     return (
         <motion.div initial={{ width: 0 }} animate={{ width: "100%" }} exit={{ x: window.innerWidth }} >
