@@ -6,14 +6,15 @@ import { Container } from './word-document.styles'
 import { template } from '../../assets/word-template';
 import { Button } from 'react-bootstrap';
 import { calculateAge } from '../reply/reply.component';
+import URLS from '../../assets/URLS';
 const WordDocument = ({ paitent }) => {
     const [editorContent, setEditorContent] = useState('');
-    console.log(paitent);
-
-    const templateString = template;
+    const { doctor_report } = paitent;
+    const templateString = doctor_report ? doctor_report : template;
     const renderedString = mustache.render(templateString, { ...paitent, age: calculateAge(paitent.birth_date) });
     const sendDataToBackend = () => {
-        axios.post('/api/word-document', { content: editorContent })
+        console.log(paitent.id);
+        axios.post(`http://localhost:8000/api/update_doctor-report/${paitent.id}`, { doctor_report: editorContent })
             .then(response => {
                 console.log(response.data);
             })
@@ -37,7 +38,7 @@ const WordDocument = ({ paitent }) => {
                 }}
                 onEditorChange={setEditorContent}
             />
-            <Button variant='secondary'>save changes</Button>
+            <Button variant='secondary' onClick={sendDataToBackend}>save changes</Button>
         </Container>
 
     );
